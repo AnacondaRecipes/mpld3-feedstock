@@ -29,6 +29,7 @@ test:
 about:
   home: http://mpld3.github.com
   license: BSD 3-Clause
+  license_family: BSD
   summary: 'D3 Viewer for Matplotlib.'
 
 extra:
