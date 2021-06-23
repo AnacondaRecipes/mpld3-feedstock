@@ -16,21 +16,32 @@ build:
 requirements:
   host:
     - python
+    - pip
     - setuptools
+    - wheel
   run:
     - python
-    - jinja2
-    - matplotlib
+    - jinja2 >=2.7
+    - matplotlib >=1.3
+    # Optionally, and preferably IPython 2.0+, see https://mpld3.github.io/install.html
+    - ipython >=2.0
 
 test:
   imports:
     - mpld3
+  requires:
+    - pip
+  commands:
+    - pip check
 
 about:
-  home: http://mpld3.github.com
-  license: BSD 3-Clause
+  home: https://mpld3.github.io/
+  license: BSD-3-Clause
   license_family: BSD
+  license_file: LICENSE
   summary: 'D3 Viewer for Matplotlib.'
+  doc_url: https://mpld3.github.io/
+  dev_url: https://github.com/mpld3/mpld3
 
 extra:
   recipe-maintainers:
