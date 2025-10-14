@@ -1,13 +1,13 @@
 {% set name = "mpld3" %}
-{% set version = "0.5.9" %}
+{% set version = "0.5.11" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/mpld3-{{ version }}.tar.gz
-  sha256: d8d228b2911132fd0154e2a49543b7f97247f9851cfe468c6b616f452c676158
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mpld3-{{ version }}.tar.gz
+  sha256: bffe2c93f8b406f8d4dc059565dfecb4779e8a1fc50bfbb4e7f5d476a274eab7
 
 build:
   number: 0
@@ -37,7 +37,7 @@ about:
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: 'D3 Viewer for Matplotlib.'
+  summary: D3 Viewer for Matplotlib.
   doc_url: https://mpld3.github.io/
   dev_url: https://github.com/mpld3/mpld3
 
