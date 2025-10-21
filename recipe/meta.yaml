@@ -6,12 +6,12 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/mpld3-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: bffe2c93f8b406f8d4dc059565dfecb4779e8a1fc50bfbb4e7f5d476a274eab7
 
 build:
   number: 0
-  script: pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
 
 requirements:
   host:
@@ -25,20 +25,33 @@ requirements:
     - matplotlib-base
 
 test:
+  source_files:
+    - mpld3/test_plots
   imports:
     - mpld3
+    - mpld3._display
+    - mpld3.mpld3renderer
+    - mpld3.mplexporter
   commands:
     - pip check
+    - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
+    - pytest -v mpld3/test_plots
   requires:
     - pip
+    - pytest
 
 about:
-  home: https://mpld3.github.io/
+  home: https://mpld3.github.io
+  summary: D3 Viewer for Matplotlib.
+  description: The mpld3 project brings together Matplotlib, 
+    the popular Python-based graphing library, and D3js,
+    the popular JavaScript library for creating interactive data visualizations for the web.
+    The result is a simple API for exporting your matplotlib graphics to HTML
+    code which can be used within the browser, within standard web pages, blogs, or tools such as the IPython notebook.
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: D3 Viewer for Matplotlib.
-  doc_url: https://mpld3.github.io/
+  doc_url: https://mpld3.github.io
   dev_url: https://github.com/mpld3/mpld3
 
 extra:
