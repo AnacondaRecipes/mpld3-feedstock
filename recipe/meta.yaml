@@ -34,10 +34,15 @@ requirements:
 {% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_js_libs.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_plugin.py" %}
 {% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_show.py" %}
+# available version matplotlib-base for PY3.9 doesn't have attribute 'get_converter'
+# E           AttributeError: 'XAxis' object has no attribute 'get_converter'
+{% set ignore_empty_collections = "" %}
+{% set ignore_empty_collections = ignore_empty_collections + " --ignore=mpld3/tests/test_empty_collections.py" %}  # [py<310]
 
 test:
   source_files:
     - mpld3/tests
+    - mpld3/test_plots
   imports:
     - mpld3
     - mpld3._display
@@ -46,7 +51,8 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    - pytest -v {{ ignore_tests }}
+    - pytest -v mpld3/tests {{ ignore_tests }} {{ ignore_empty_collections }}
+    - pytest -v mpld3/test_plots {{ ignore_tests }} {{ ignore_empty_collections }}
   requires:
     - pip
     - pytest
