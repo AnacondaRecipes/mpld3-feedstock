@@ -1,13 +1,23 @@
 {% set name = "mpld3" %}
-{% set version = "0.5.11" %}
+{% set version = "0.5.12" %}
+{% set ignore_tests = "--ignore=mpld3/tests/test_d3_snapshots.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_plots.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_elements.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_figure.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_html.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_js_libs.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_plugin.py" %}
+{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_show.py" %}
 
+# E   ModuleNotFoundError: No module named 'diffimg'
+# E   ImportError: attempted relative import beyond top-level package
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bffe2c93f8b406f8d4dc059565dfecb4779e8a1fc50bfbb4e7f5d476a274eab7
+  sha256: 1333e2bca012ea9af3c27801ba36f65bc26540b6fad4c56a903afb19477f2c37
 
 build:
   number: 0
@@ -23,17 +33,6 @@ requirements:
     - python
     - jinja2
     - matplotlib-base
-
-# E   ModuleNotFoundError: No module named 'diffimg'
-{% set ignore_tests = "--ignore=mpld3/tests/test_d3_snapshots.py" %}
-# E   ImportError: attempted relative import beyond top-level package
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_plots.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_elements.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_figure.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_html.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_js_libs.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_plugin.py" %}
-{% set ignore_tests = ignore_tests + " --ignore=mpld3/tests/test_show.py" %}
 
 test:
   source_files:
@@ -58,7 +57,7 @@ test:
 about:
   home: https://mpld3.github.io
   summary: D3 Viewer for Matplotlib.
-  description: The mpld3 project brings together Matplotlib, 
+  description: The mpld3 project brings together Matplotlib,
     the popular Python-based graphing library, and D3js,
     the popular JavaScript library for creating interactive data visualizations for the web.
     The result is a simple API for exporting your matplotlib graphics to HTML
