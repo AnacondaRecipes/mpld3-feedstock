@@ -1,13 +1,13 @@
 {% set name = "mpld3" %}
-{% set version = "0.5.11" %}
+{% set version = "0.5.12" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: bffe2c93f8b406f8d4dc059565dfecb4779e8a1fc50bfbb4e7f5d476a274eab7
+  sha256: 1333e2bca012ea9af3c27801ba36f65bc26540b6fad4c56a903afb19477f2c37
 
 build:
   number: 0
@@ -47,10 +47,8 @@ test:
   commands:
     - pip check
     - python -c "from importlib.metadata import version; assert(version('{{ name }}')=='{{ version }}')"
-    # available version matplotlib-base for PY3.9 doesn't have attribute 'get_converter'
-    # E           AttributeError: 'XAxis' object has no attribute 'get_converter'
-    - pytest -v mpld3/tests {{ ignore_tests }}  # [py>39]
-    - pytest -v mpld3/test_plots {{ ignore_tests }}  # [py>39]
+    - pytest -v mpld3/tests {{ ignore_tests }}
+    - pytest -v mpld3/test_plots {{ ignore_tests }}
   requires:
     - pip
     - pytest
